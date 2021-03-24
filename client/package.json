@@ -1,0 +1,21 @@
+{
+  "name": "clichat-connect",
+  "version": "1.0.0",
+  "description": "CLIChat Connection Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/sudocode1/clichat"
+  },
+  "author": "sudocode1, 1s3k3b",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prompt-sync": "^4.2.0",
+    "request": "^2.88.2",
+    "ws": "^7.4.1"
+  }
+}

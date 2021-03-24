@@ -11,7 +11,7 @@ CLIChat - Chat rooms for the command line by sudocode1 & 1s3k3b.
 <br>
 
 ### Host a server (or multiple servers):
-Download the source code, navigate to `/<clichatdir>/server` and edit it, there are two options near the top of the file:
+Download the source code, navigate to `/<clichatdir>/server` and edit `index.js`, there are two options near the top of the file:
 ```js
 // set the ports you want to host on if you need multiple servers
 const ports = [90]

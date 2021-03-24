@@ -8,7 +8,9 @@ CLIChat - Chat rooms for the command line.
 - Locate to `/<clichatdir>/client`
 - Run `npm i` (first time only) and then `node index.js`
 
-### Host a server (or multiple servers)
+<br><br>
+
+### Host a server (or multiple servers):
 Download the source code, navigate to `/<clichatdir>/server` and edit it, there are two options near the top of the file:
 ```js
 // set the ports you want to host on if you need multiple servers

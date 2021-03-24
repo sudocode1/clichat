@@ -1,0 +1,15 @@
+{
+  "name": "clichat-server",
+  "version": "1.0.0",
+  "description": "CLIChat Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/sudocode1/clichat"
+  },
+  "author": "sudocode1, 1s3k3b",
+  "license": "MPL-2.0"
+}

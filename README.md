@@ -1,5 +1,5 @@
 # CLIChat
-CLIChat - Chat rooms for the command line.
+CLIChat - Chat rooms for the command line by sudocode1 & 1s3k3b.
 
 ## How to use
 ### Connect to a server:

@@ -16,7 +16,7 @@ const clear = () => {
     console.clear();
     for (const s of history) log(s, false, false);
 };
-const log = (s, n = true, c = true) => [x => process.stdout.write(x), n ? x => history.push(x) : () => {}, c ? clear : () => {}].forEach(f => f(n ? `[${new Date().toLocaleString()}] ${s}` : s));
+const log = (s, n = true, c = true) => [c ? clear : () => {}, x => process.stdout.write(x.trim() + '\n'), n ? x => history.push(x) : () => {}].forEach(f => f(n ? `[${new Date().toLocaleString()}] ${s}` : s));
 
 clear();
 const wsHandlers = {

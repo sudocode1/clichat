@@ -28,7 +28,7 @@ The filter should have the words you want to filter from usernames and chat. <br
 To start the server, run `npm i` (first time only) and then `node index.js`
 
 ## Writing a custom client or a Bot
-Writing a custom client is quite simple. <br>
+Writing a custom client or bot is quite simple. <br>
 - Everything uses pure WebSockets & JSON.
 - Connect to the server using `['auth', {ip, username}]` (IP is not currently used at all)
 - Messages should be sent as `['msg', {idOfUser, messageContent}]`

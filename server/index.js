@@ -2,7 +2,7 @@ const { Server } = require('ws');
 const express = require('express');
 
 // set the ports you want to host on if you need multiple servers
-const ports = [90]
+const ports = [90];
 
 // set the words you want to filter from usernames and messages
 const filter = ["filtertest", "yomama"];

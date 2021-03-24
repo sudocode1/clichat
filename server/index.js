@@ -46,8 +46,11 @@ wss.on('connection', ws => {
     let ip;
     connections.push({ ws, id });
     ws.onmessage = s => {
-        const d = JSON.parse(s.data);
-        handlers[d[0]] && handlers[d[0]](...d.slice(1));
+        let d;
+        try {
+            d = JSON.parse(s.data);
+            handlers[d[0]] && handlers[d[0]](...d.slice(1));
+        } catch {}
     };
     ws.onclose = () => {
         connections = connections.filter(x => x.id !== id);

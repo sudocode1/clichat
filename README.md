@@ -8,7 +8,7 @@ CLIChat - Chat rooms for the command line by sudocode1 & 1s3k3b.
 - Locate to `/<clichatdir>/client`
 - Run `npm i` (first time only) and then `node index.js`
 
-<br><br>
+<br>
 
 ### Host a server (or multiple servers):
 Download the source code, navigate to `/<clichatdir>/server` and edit it, there are two options near the top of the file:

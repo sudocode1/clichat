@@ -17,26 +17,44 @@ const clear = () => {
     for (const s of history) log(s, false, false);
 };
 const log = (s, n = true, c = true) => [c ? clear : () => {}, x => process.stdout.write(x.trim() + '\n'), n ? x => history.push(x) : () => {}].forEach(f => f(n ? `[${new Date().toLocaleString()}] ${s}` : s));
+function historyLog() {
+    process.stdout.write('\u001b[3J\u001b[2J\u001b[1J');
+    console.clear();
+    let hist = "";
+
+    history.forEach(x => {
+        hist += `\n${x}`;
+    });
+
+    console.log(hist);
+}
 
 clear();
 const wsHandlers = {
     message: (username, content) => {
-        log(`${username}: ${content}`)
+        history.push(`${username}: ${content}`);
+        historyLog();
     },
     disconnect: username => {
         if (username === null) null;
-        else log(`${username} left the room\n`);
+        else {
+            history.push(`${username} left the room.`);
+            historyLog();
+        };
     },
     join: username => {
-        log(`${username} joined the room.\n`);
+        history.push(`${username} joined the room.`);
+        historyLog();
     },
     id: (x, serverVer) => {
         history.push("Server Version: " + serverVer);
+        history.push("You joined the room.")
         id = x;
-        log('You joined the room.\n');
+        historyLog();
     },
     refusal: x => {
-        log(x);
+        history.push(`REFUSAL: ${x}`);
+        historyLog();
         process.exit();
     }
 };
@@ -44,7 +62,7 @@ const wsHandlers = {
 let ip;
 let id;
 
-if (!username) (log("No username entered"), process.exit());
+if (!username) (history.push("No username entered"), historyLog(), process.exit());
 
 ws.onopen = async () => {
     ip = await new Promise((a, b) => request(`https://myexternalip.com/raw`, (err, _, body) => err ? b(err) : a(body)));

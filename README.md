@@ -29,6 +29,8 @@ To start the server, run `npm i` (first time only) and then `node index.js`
 
 ## Writing a custom client or a Bot
 Writing a custom client or bot is quite simple. <br>
+There is an official API wrapper made for Node.js: [clichat.js](https://github.com/sudocode1/clichat.js)<br>
+You can also make your own API wrapper by utilising this list. 
 - Everything uses pure WebSockets & JSON.
 - Connect to the server using `['auth', {ip, username}]` (IP is not currently used at all)
 - Messages should be sent as `['msg', {idOfUser, messageContent}]`
@@ -36,4 +38,4 @@ Writing a custom client or bot is quite simple. <br>
 - A user disconnect is recieved as `['disconnect', username]`
 - A user join is recieved as `['join', username]`
 - You joining the room is recieved as `['id', yourID]`
-- A server refusal is recieved as `['refusal', refusalString]`
+- A server refusal is recieved as `['refusal', refusalString]` 

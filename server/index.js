@@ -3,9 +3,10 @@ const express = require('express');
 
 // set the ports you want to host on if you need multiple servers
 const ports = [90];
+const serverVersion = "25032021";
 
 // set the words you want to filter from usernames and messages
-const filter = ["filtertest", "yomama"];
+const filter = ["words or phrases", "to filter"];
 
 async function hostServer(PORT) {
     let connections = [];
@@ -21,19 +22,31 @@ wss.on('connection', ws => {
 
     const handlers = {
         auth: s => {
-            if (connections.some(x => x.username === s.username)) return ws.send(JSON.stringify(["refusal", 'Username already taken.']));
-            if (filter.some(x => s.username.toLowerCase().includes(x))) return ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
+            if (connections.some(x => x.username === s.username)) {
+                ws.send(JSON.stringify(["refusal", 'Username already taken.']));
+                return ws.close();
+            }
+            if (filter.some(x => s.username.toLowerCase().includes(x))) {
+                ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
+                return ws.close();
+            }
             username = s.username;
             connections.find(x => x.id === id).username = username;
             ip = s.ip;
-            ws.send(JSON.stringify(['id', id]));
+            ws.send(JSON.stringify(['id', id, serverVersion]));
             console.log(`[SERVER: ${PORT}] Connection: ${username} #${id}`);
             connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])))
         },
         msg: s => {
             //console.log(s);
-            if (filter.some(x => s.msg.toLowerCase().includes(x))) return ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
-            if (!s.msg.trim()) return ws.send(JSON.stringify(['refusal', 'No empty messages allowed!']));
+            if (filter.some(x => s.msg.toLowerCase().includes(x))) {
+                ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
+                return ws.close();
+            }
+            if (!s.msg.trim()) {
+                ws.send(JSON.stringify(["refusal", 'No Empty Messages allowed!']));
+                return ws.close();
+            }
             if (s.id === id)
                 connections
                     .filter(x => x.id !== id)

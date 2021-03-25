@@ -27,7 +27,7 @@ function historyLog() {
     let hist = "";
 
     history.forEach(x => {
-        hist += `\n${x}`;
+        hist += `${x}`;
     });
 
     console.log(hist);
@@ -36,7 +36,7 @@ function historyLog() {
 clear();
 const wsHandlers = {
     message: (username, content) => {
-        history.push(`${username}: ${content}`);
+        history.push(`[${new Date().toLocaleString()}] ${username}: ${content}`);
         historyLog();
     },
     disconnect: username => {

@@ -30,7 +30,8 @@ const wsHandlers = {
     join: username => {
         log(`${username} joined the room.\n`);
     },
-    id: x => {
+    id: (x, serverVer) => {
+        history.push("Server Version: " + serverVer);
         id = x;
         log('You joined the room.\n');
     },

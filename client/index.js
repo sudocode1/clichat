@@ -63,8 +63,7 @@ const wsHandlers = {
     }
 };
 
-let ip;
-let id;
+let ip, id;
 
 if (!username) (history.push("No username entered"), historyLog(), process.exit());
 

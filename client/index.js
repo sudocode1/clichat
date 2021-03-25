@@ -4,7 +4,11 @@ const prompt = require("prompt-sync")();
 
 let username = prompt("username: ");
 let connection = prompt("server to connect to: ");
+let secure = prompt("is this server secure [Y/N]: ");
+secure = secure == "y" || secure == "Y";
+let token;
 
+secure ? token = prompt("token: ") : null;
 
 process.stdin.resume();
 
@@ -66,7 +70,7 @@ if (!username) (history.push("No username entered"), historyLog(), process.exit(
 
 ws.onopen = async () => {
     ip = await new Promise((a, b) => request(`https://myexternalip.com/raw`, (err, _, body) => err ? b(err) : a(body)));
-    ws.send(JSON.stringify(['auth', { ip, username }]));
+    secure ? ws.send(JSON.stringify(['auth', { ip, username, token }])) : ws.send(JSON.stringify(['auth', { ip, username }]));
     process.stdin.on('data', x => {
         const msg = `${x}`;
         if (msg === "exit") return rl.close();

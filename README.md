@@ -18,7 +18,7 @@ More pages
 <br>
 
 ### Host a server (or multiple servers):
-_If you want to host a secure server, look at the [secure-server readme](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)._
+_If you want to host a secure server, look at the [secure-server readme](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)._ <br>
 Download the source code, navigate to `/<clichatdir>/server` and edit `index.js`, there are two options near the top of the file:
 ```js
 // set the ports you want to host on if you need multiple servers

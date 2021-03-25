@@ -3,7 +3,11 @@ CLIChat - Chat rooms for the command line with no signups by sudocode1 & 1s3k3b.
 Our official CLIChat server: `188.165.82.203:90` <br>
 - [How to use](#how-to-use)
 - [Writing a custom client or a bot](#writing-a-custom-client-or-a-bot)
+<br>
 
+More pages
+- [Client README](https://github.com/sudocode1/clichat/blob/master/client/README.md)
+- [Secure Server README](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)
 ## How to use
 ### Connect to a server:
 - Download the source code
@@ -14,6 +18,7 @@ Our official CLIChat server: `188.165.82.203:90` <br>
 <br>
 
 ### Host a server (or multiple servers):
+_If you want to host a secure server, look at the [secure-server readme](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)._ <br>
 Download the source code, navigate to `/<clichatdir>/server` and edit `index.js`, there are two options near the top of the file:
 ```js
 // set the ports you want to host on if you need multiple servers
@@ -28,7 +33,7 @@ The filter should have the words you want to filter from usernames and chat. <br
 To start the server, run `npm i` (first time only) and then `node index.js`
 
 ## Writing a custom client or a Bot
-Writing a custom client or bot is quite simple. <br>
+Writing a custom client or bot is quite simple (slightly different for [secure servers](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)).<br>
 There is an official API wrapper made for Node.js: [clichat.js](https://github.com/sudocode1/clichat.js).<br>
 You can also make your own API wrapper by utilising this list. 
 - Everything uses pure WebSockets & JSON.

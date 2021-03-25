@@ -11,7 +11,7 @@ CLIChat Secure Server has more authorization features and other configurable sec
 - You can set tokens with the `tokens` object. **Do not set `inuse` to true for any of your tokens if you have 1UPT enabled.**
 - 1UPT is enabled by default
 - You can enable or disable 1UPT.
-- Secure Server does not utilise WSS, it still utilses WS ([Heres the difference](https://portswigger.net/web-security/websockets/what-are-websockets#:~:text=The%20wss%20protocol%20establishes%20a,protocol%20uses%20an%20unencrypted%20connection.&text=At%20this%20point%2C%20the%20network,WebSocket%20messages%20in%20either%20direction.)), however we may work towards using WSS in the future.
+- Secure Server does not utilise WSS, it still utilises WS ([Heres the difference](https://portswigger.net/web-security/websockets/what-are-websockets#:~:text=The%20wss%20protocol%20establishes%20a,protocol%20uses%20an%20unencrypted%20connection.&text=At%20this%20point%2C%20the%20network,WebSocket%20messages%20in%20either%20direction.)), however we may work towards using WSS in the future.
 
 
 ## Possible issues with API (custom clients, api wrappers, bots)

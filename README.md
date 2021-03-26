@@ -39,7 +39,7 @@ You can also make your own API wrapper by utilising this list.
 - Everything uses pure WebSockets & JSON.
 - Connect to the server using `['auth', {ip, username}]` (IP is not currently used at all)
 - Messages should be sent as `['msg', {idOfUser, messageContent}]`
-- Messages are recieved as the same as above
+- Messages are recieved as `['message', {username, messageContent}]`
 - A user disconnect is recieved as `['disconnect', username]`
 - A user join is recieved as `['join', username]`
 - You joining the room is recieved as `['id', yourID]`

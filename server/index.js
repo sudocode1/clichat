@@ -14,9 +14,12 @@ async function hostServer(PORT) {
 console.log('Port:', PORT);
 
 const app = express()
-.use((_, r) => r.send('go away'))
+.get('/', (_, r) => r.sendFile(require('path').join(process.cwd(), '/web/index.html')))
+.get('/styles.css', (_, r) => r.sendFile(require('path').join(process.cwd(), '/web/styles.css')))
 .listen(PORT);
 const wss = new Server({ server: app });
+
+
 wss.on('connection', ws => {
 
 

@@ -19,11 +19,11 @@
 
     if (param["username"]) {
         console.log("authorize");
-        let ws = new WebSocket('ws://YOUR_SERVER_IP');
+        let ws = new WebSocket('ws://YOUR_IP_HERE');
 
         let messageHistory = [];
 
-        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<div id="msgbox"></div>\n<textarea id="chatbox"></textarea><button id="sendButton">send</button><button id="clearChatBox">clear box</button>`;
+        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<div id="msgbox"></div>\n<textarea id="chatbox"></textarea><br><button id="sendButton">send</button><button id="clearChatBox">clear box</button>`;
 
 
         function historyPush(push) {
@@ -62,12 +62,13 @@
             }, 
 
             refusal: msg => {
-                historyPush(["REFUSAL", msg, true]);
+                historyPush(["REFUSAL", new Date().toLocaleString(), msg, true]);
             }
         }
 
         ws.onopen = async () => {
-            ws.send(JSON.stringify(['auth', { ip: "0.0.0.0", username: param["username"] }]));
+            let u = param["username"];
+            ws.send(JSON.stringify(['auth', { ip: "0.0.0.0", username: u }]));
         }
 
         ws.onmessage = s => {
@@ -94,6 +95,10 @@
         }
 
     } else {
+        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<h2>enter username:</h2><textarea id="usernamebox"></textarea><button id="connectButton">connect</button>`;
 
+        document.getElementById('connectButton').onclick = () => {
+            document.getElementById('cl').innerHTML += `<br><br><a href="?username=${usernamebox.value}">click here to connect</a>`;
+        }
     }
 </script>

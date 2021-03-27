@@ -23,7 +23,7 @@
 
     if (param["username"]) {
         console.log("authorize");
-        let ws = new WebSocket('ws://localhost:90');
+        let ws = new WebSocket('ws://YOUR_SERVER_IP');
 
         document.getElementById('title').innerText = `[CONNECTING] ${window.location.hostname}`;
 
@@ -111,7 +111,7 @@
         }
 
     } else {
-        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<h2>enter username:</h2><textarea id="usernamebox"></textarea><br><button id="connectButton">connect</button>`;
+        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<h2>enter username:</h2><textarea id="usernamebox" placeholder="enter username"></textarea><br><button id="connectButton">connect</button>`;
 
         document.getElementById('connectButton').onclick = () => {
             document.getElementById('cl').innerHTML += `<br><br><a href="?username=${usernamebox.value}">click here to connect</a>`;

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./styles.css">
-
+<title id="title"></title>
 <body id="cl">
     <h1 id="title">test</h1>
 </body>
@@ -10,6 +10,10 @@
     let param = {};
     let id;
 
+    let options = {
+        center:true
+    }
+
     parameters.map(x => {
         let spl=x.split("=");
         param[spl[0]] = spl[1]; 
@@ -19,11 +23,13 @@
 
     if (param["username"]) {
         console.log("authorize");
-        let ws = new WebSocket('ws://YOUR_IP_HERE');
+        let ws = new WebSocket('ws://localhost:90');
+
+        document.getElementById('title').innerText = `[CONNECTING] ${window.location.hostname}`;
 
         let messageHistory = [];
 
-        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<div id="msgbox"></div>\n<textarea id="chatbox"></textarea><br><button id="sendButton">send</button><button id="clearChatBox">clear box</button>`;
+        document.getElementById('cl').innerHTML = `${options.center ? "<center>" : ""}<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<div id="msgbox"></div>\n<textarea id="chatbox"></textarea><br><button id="sendButton">send</button><button id="clearChatBox">clear box</button>${options.center ? "</center>" : ""}`;
 
 
         function historyPush(push) {
@@ -36,12 +42,12 @@
 
             string += "</h2>";
             document.getElementById('msgbox').innerHTML = string;
-        }
+        };
 
         function historyClear() {
             messageHistory = [];
             historyPush(["Chat", "Cleared", new Date().toLocaleString(), false])
-        }
+        };
 
         let handlers = {
             message: (username, content) => {
@@ -49,6 +55,7 @@
             },
 
             disconnect: username => {
+                if (username == null) return;
                 historyPush([username, "left the room", new Date().toLocaleString(), false]);
             },
 
@@ -59,10 +66,12 @@
             id: (x, serverVer) => {
                 id = x;
                 historyPush(["You", `joined the room | Server Version ${serverVer}`, new Date().toLocaleString(), false]);
+                document.getElementById('title').innerText = `[CONNECTED] ${window.location.hostname}`;
             }, 
 
             refusal: msg => {
-                historyPush(["REFUSAL", new Date().toLocaleString(), msg, true]);
+                historyPush(["REFUSAL", msg, new Date().toLocaleString(), true]);
+                document.getElementById('title').innerText = `[REFUSAL] ${window.location.hostname}`;
             }
         }
 
@@ -75,6 +84,13 @@
             const d = JSON.parse(s.data);
             handlers[d[0]] && handlers[d[0]](...d.slice(1));
         };
+
+        ws.onclose = () => {
+            setTimeout(() => {
+                document.getElementById('cl').innerHTML = `<h1>disconnected</h1>`;
+                document.getElementById('title').innerText = `[DISCONNECTED] ${window.location.hostname}`;
+            }, 2000);
+        }
 
         // setInterval(() => {
         //     if(document.getElementById('chatbox').value.endsWith('\n')) {
@@ -95,10 +111,12 @@
         }
 
     } else {
-        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<h2>enter username:</h2><textarea id="usernamebox"></textarea><button id="connectButton">connect</button>`;
+        document.getElementById('cl').innerHTML = `<h1>CLIChat Web Client (v1) for ${window.location.hostname}</h1>\n<h2>enter username:</h2><textarea id="usernamebox"></textarea><br><button id="connectButton">connect</button>`;
 
         document.getElementById('connectButton').onclick = () => {
             document.getElementById('cl').innerHTML += `<br><br><a href="?username=${usernamebox.value}">click here to connect</a>`;
         }
+
+        document.getElementById('title').innerText = `[AUTH] ${window.location.hostname}`;
     }
 </script>

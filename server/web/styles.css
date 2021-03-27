@@ -1,8 +1,7 @@
 * {
-    font-family: Monaco, Helvetica, Verdana;
+    font-family: Arial, Monaco, Helvetica, Verdana;
     font-weight: 175;
-    color: black;
-} 
+}
 
 button {
     padding: 8px;
@@ -12,8 +11,26 @@ button {
 }
 
 #cl {
-      background: rgb(186,255,251);
-      background: linear-gradient(90deg, rgba(186,255,251,1) 0%, rgba(240,253,255,1) 0%, rgba(188,202,255,1) 51%, rgba(148,220,255,1) 68%, rgba(103,213,255,1) 87%, rgba(0,48,255,1) 100%);
-} 
+    color: white;
+    background: rgb(51,29,253);
+    background: linear-gradient(90deg, rgba(51,29,253,1) 0%, rgba(131,58,180,1) 100%);
+}
 
+a {
+    color: white;
+    text-decoration: none;
+}
 
+textarea {
+    width: 200px;
+    height: 50px;
+}
+
+#usernamebox {
+    font-size: 200%;
+    width: 250px;
+}
+
+#chatbox {
+    font-size: 150%;
+}

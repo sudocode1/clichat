@@ -1,0 +1,36 @@
+* {
+    font-family: Arial, Monaco, Helvetica, Verdana;
+    font-weight: 175;
+}
+
+button {
+    padding: 8px;
+    border-radius: 10%;
+    font-size: larger;
+
+}
+
+#cl {
+    color: white;
+    background: rgb(51,29,253);
+    background: linear-gradient(90deg, rgba(51,29,253,1) 0%, rgba(131,58,180,1) 100%);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+textarea {
+    width: 200px;
+    height: 50px;
+}
+
+#usernamebox {
+    font-size: 200%;
+    width: 250px;
+}
+
+#chatbox {
+    font-size: 150%;
+}

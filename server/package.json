@@ -11,5 +11,10 @@
     "url": "github.com/sudocode1/clichat"
   },
   "author": "sudocode1, 1s3k3b",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prompt-sync": "^4.2.0",
+    "ws": "^7.4.4"
+  }
 }

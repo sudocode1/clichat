@@ -8,6 +8,7 @@ Our official CLIChat server: `188.165.82.203:90` <br>
 More pages
 - [Client README](https://github.com/sudocode1/clichat/blob/master/client/README.md)
 - [Secure Server README](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)
+- [Server Web Client README](https://github.com/sudocode1/clichat/blob/master/server/web/README.md))
 ## How to use
 ### Connect to a server:
 - Download the source code

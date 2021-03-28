@@ -1,0 +1,3 @@
+@ECHO OFF
+npm i
+@ECHO ON

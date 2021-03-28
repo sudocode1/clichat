@@ -35,7 +35,6 @@ wss.on('connection', ws => {
             }
             username = s.username;
             connections.find(x => x.id === id).username = username;
-            ip = s.ip;
             ws.send(JSON.stringify(['id', id, serverVersion]));
             console.log(`[SERVER: ${PORT}] Connection: ${username} #${id}`);
             connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])))
@@ -59,7 +58,6 @@ wss.on('connection', ws => {
     let id = connections.length;
     while (connections.some(x => x.id === id)) id++;
     let username;
-    let ip;
     connections.push({ ws, id });
     ws.onmessage = s => {
         let d;

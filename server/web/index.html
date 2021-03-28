@@ -23,7 +23,7 @@
 
     if (param["username"]) {
         console.log("authorize");
-        let ws = new WebSocket('ws://YOUR_SERVER_IP');
+        let ws = new WebSocket('ws://localhost:90');
 
         document.getElementById('title').innerText = `[CONNECTING] ${window.location.hostname}`;
 
@@ -77,7 +77,7 @@
 
         ws.onopen = async () => {
             let u = param["username"];
-            ws.send(JSON.stringify(['auth', { ip: "0.0.0.0", username: u }]));
+            ws.send(JSON.stringify(['auth', { username: u }]));
         }
 
         ws.onmessage = s => {

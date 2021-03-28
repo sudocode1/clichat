@@ -33,6 +33,12 @@ wss.on('connection', ws => {
                 ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
                 return ws.close();
             }
+
+            if (s.username.length > 15) {
+                ws.send(JSON.stringify(['refusal', 'username is too long']));
+                ws.close();
+            }
+
             username = s.username;
             connections.find(x => x.id === id).username = username;
             ws.send(JSON.stringify(['id', id, serverVersion]));
@@ -41,6 +47,10 @@ wss.on('connection', ws => {
         },
         msg: s => {
             //console.log(s);
+            if (s.msg.length > 200) {
+                return ws.send(JSON.stringify(['refusal', `message is too long [${s.msg.length}/200]`]));
+            }
+
             if (filter.some(x => s.msg.toLowerCase().includes(x))) {
                 ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));
                 return ws.close();

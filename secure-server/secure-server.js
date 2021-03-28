@@ -57,6 +57,11 @@ wss.on('connection', ws => {
                 return ws.close();
             }
 
+            if (s.username.length > 15) {
+                ws.send(JSON.stringify(['refusal', 'username is too long']));
+                ws.close();
+            }
+
             if (!s.token || !tokens[s.token] || (tokens[s.token].inuse == true && config['1UPT'] == true)) {
                 ws.send(JSON.stringify(['refusal', 'Token refused']));
                 return ws.close();
@@ -141,6 +146,9 @@ wss.on('connection', ws => {
         msg: s => {
             if (passedAuth == false) return;
 
+            if (s.msg.length > 200) {
+                return ws.send(JSON.stringify(['refusal', `message is too long [${s.msg.length}/200]`]));
+            }
             //console.log(s);
             if (filter.some(x => s.msg.toLowerCase().includes(x))) {
                 ws.send(JSON.stringify(['refusal', 'No profanity allowed!']));

@@ -38,7 +38,7 @@ Writing a custom client or bot is quite simple (slightly different for [secure s
 There is an official API wrapper made for Node.js: [clichat.js](https://github.com/sudocode1/clichat.js).<br>
 You can also make your own API wrapper by utilising this list. 
 - Everything uses pure WebSockets & JSON.
-- Connect to the server using `['auth', {username}]`
+- Connect to the server using `['auth', {ip, username}]` (IP is not currently used at all)
 - Messages should be sent as `['msg', {idOfUser, messageContent}]`
 - Messages are recieved as `['message', {username, messageContent}]`
 - A user disconnect is recieved as `['disconnect', username]`

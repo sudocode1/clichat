@@ -3,7 +3,7 @@ const express = require('express');
 const config = require("./secureconfig.json");
 const prompt = require("prompt-sync")();
 
-// set the ports you want to host on if you need multiple servers
+// set the port you want to host on
 const port = 70;
 const serverVersion = "s25032021 - Based on 25032021";
 console.log(`CLIChat Secure Server ${serverVersion}`);
@@ -47,7 +47,6 @@ wss.on('connection', ws => {
             config['1UPT'] ? tokens[token].inuse = true : null;
             username = s.username;
             connections.find(x => x.id === id).username = username;
-            ip = s.ip;
             ws.send(JSON.stringify(['id', id, serverVersion]));
             console.log(`[SERVER: ${PORT}] Connection: ${username} #${id}`);
             connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])))
@@ -71,7 +70,6 @@ wss.on('connection', ws => {
     let id = connections.length;
     while (connections.some(x => x.id === id)) id++;
     let username;
-    let ip;
     let token;
     connections.push({ ws, id, token });
     ws.onmessage = s => {

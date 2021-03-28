@@ -62,16 +62,20 @@ const wsHandlers = {
         history.push(`REFUSAL: ${x}`);
         historyLog();
         process.exit();
+    },
+    authmsg: x => {
+        console.log("auth link:", x);
+        let tok = prompt('token: ');
+        ws.send(JSON.stringify(['tokenauth', tok]));
     }
 };
 
-let ip, id;
+let id;
 
 if (!username) (history.push("No username entered"), historyLog(), process.exit());
 
 ws.onopen = async () => {
-    ip = await new Promise((a, b) => request(`https://myexternalip.com/raw`, (err, _, body) => err ? b(err) : a(body)));
-    secure ? ws.send(JSON.stringify(['auth', { ip, username, token }])) : ws.send(JSON.stringify(['auth', { ip, username }]));
+    secure ? ws.send(JSON.stringify(['auth', { username, token }])) : ws.send(JSON.stringify(['auth', { username }]));
     process.stdin.on('data', x => {
         const msg = `${x}`;
         if (msg === "exit") return rl.close();
@@ -84,3 +88,5 @@ ws.onmessage = s => {
     const d = JSON.parse(s.data);
     wsHandlers[d[0]] && wsHandlers[d[0]](...d.slice(1));
 };
+
+ws.onclose = () => {console.log('disconnected'); process.exit();};

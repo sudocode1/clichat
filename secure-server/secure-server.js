@@ -36,7 +36,7 @@ const app = express()
     if (!temporaryIds[req.params.id].inUse) {
         res.send('shut up');
     } else {
-        res.send(`<!DOCTYPE html><h1>authorization</h1><h2>your token is ${temporaryIds[req.params.id].token}</h2>`);
+        res.send(`<!DOCTYPE html><style>h1,h2{font-family:Arial;}</style><h1>authorization</h1><h2>your token is ${temporaryIds[req.params.id].token}</h2>`);
     }
 })/*;*/
 

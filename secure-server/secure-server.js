@@ -8,6 +8,13 @@ let temporaryIds = {
 
 };
 
+// bot tokens should be extremely hard to bruteforce.
+// preferably, tokens should be  >>> 40+ <<< characters long, with uppercase letters, lowercase letters, symbols and numbers.
+
+let botDetails = {
+    "token1": 'botusr'
+}
+
 // set the port you want to host on
 const port = 70;
 const serverVersion = "s25032021 - Based on 25032021";
@@ -141,7 +148,7 @@ wss.on('connection', ws => {
             connections.find(x => x.id === id).username = username;
             ws.send(JSON.stringify(['id', id, serverVersion]));
             console.log(`[SERVER: ${PORT}] Connection: ${username} #${id}`);
-            connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])))
+            connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])));
         },
         msg: s => {
             if (passedAuth == false) return;
@@ -163,6 +170,27 @@ wss.on('connection', ws => {
                     .filter(x => x.id !== id)
                     .forEach(x => x.ws.send(JSON.stringify(['message', username, s.msg])))
         },
+        botauth: s => {
+            console.log("bot connection");
+            // ['botauth', {botusername, bottoken}]
+
+            console.log(s);
+            //let bd = JSON.parse(s);
+            //console.log(bd);
+            
+            if (!botDetails[s.bottoken] || s.botusername !== botDetails[s.bottoken]) {
+                console.log("bot denied");
+                ws.send(JSON.stringify(['refusal', 'bot refused']));
+                return ws.close();
+            } else {
+                console.log("bot authorized");
+                username = s.botusername;
+                username = `[BOT] ${username}`;
+                passedAuth = true;
+                connections.filter(x => x.id !== id).forEach(x => x.ws.send(JSON.stringify(['join', username])));
+                ws.send(JSON.stringify(['id', id]));
+            }  
+        }
     };
     let id = connections.length;
     while (connections.some(x => x.id === id)) id++;
@@ -170,6 +198,7 @@ wss.on('connection', ws => {
     let token;
     let tempId;
     let temporaryToken;
+    let passedAuth=false;
     connections.push({ ws, id, token });
     ws.onmessage = s => {
         //console.log(s);

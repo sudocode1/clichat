@@ -87,9 +87,9 @@ wss.on('connection', ws => {
 
                 let result;
 
-                if (caseType == 0 && typeof(array) == `string`) {
+                if (caseType == 0 && typeof(char) == `string`) {
                     result = char.toLowerCase();
-                } else if (caseType == 1 && typeof(array) == `string`) {
+                } else if (caseType == 1 && typeof(char) == `string`) {
                     result = char.toUpperCase();
                 } else {
                     result = char;
@@ -155,6 +155,11 @@ wss.on('connection', ws => {
 
             if (s.msg.length > 200) {
                 return ws.send(JSON.stringify(['refusal', `message is too long [${s.msg.length}/200]`]));
+            }
+
+            if (s.msg.includes('%')) {
+                ws.send(JSON.stringify(['refusal', 'no']));
+                return ws.close();
             }
             //console.log(s);
             if (filter.some(x => s.msg.toLowerCase().includes(x))) {

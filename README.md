@@ -34,7 +34,7 @@ The filter should have the words you want to filter from usernames and chat. <br
 To start the server, run `npm i` (first time only) and then `node index.js`
 
 ## Writing a custom client or a Bot
-Writing a custom client or bot is quite simple (slightly different for [secure servers](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)).<br>
+Writing a custom client or bot is quite simple (**completely different** for [secure servers](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)).<br>
 There is an official API wrapper made for Node.js: [clichat.js](https://github.com/sudocode1/clichat.js).<br>
 You can also make your own API wrapper by utilising this list. 
 - Everything uses pure WebSockets & JSON.

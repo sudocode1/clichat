@@ -36,9 +36,9 @@ wss.on('connection', ws => {
 
             if (s.username.length > 15) {
                 ws.send(JSON.stringify(['refusal', 'username is too long']));
-                ws.close();
+                return ws.close();
             }
-
+            
             username = s.username;
             connections.find(x => x.id === id).username = username;
             ws.send(JSON.stringify(['id', id, serverVersion]));

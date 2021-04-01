@@ -10,7 +10,8 @@ Users are now authenticated with generic tokens and temporary tokens. Here's how
 - The user then goes to that link and are given an 100 character long token with lowercase characters, uppercase characters, numbers and a period/full stop (.)
 - The user then sends `[ 'tokenauth', tok ]` (tok is temporary token)
 - The web page text is then changed, so the token can no longer be retrieved
-This entire process is built to prevent unauthorized bots from connecting.
+
+This entire process is built to prevent unauthorized bots from connecting. <Br>
 Obviously, it's still possible to crack a bot through, but its painfully difficult. <br>
 TLDR: Login -> Web page created with token -> User sends token -> Web page removed
 

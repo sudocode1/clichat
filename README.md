@@ -8,7 +8,7 @@ Our official CLIChat server: `188.165.82.203:90` <br>
 More pages
 - [Client README](https://github.com/sudocode1/clichat/blob/master/client/README.md)
 - [Secure Server README](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)
-- [Server Web Client README](https://github.com/sudocode1/clichat/blob/master/server/web/README.md))
+- [Server Web Client README](https://github.com/sudocode1/clichat/blob/master/server/web/README.md)
 ## How to use
 ### Connect to a server:
 - Download the source code
@@ -34,11 +34,11 @@ The filter should have the words you want to filter from usernames and chat. <br
 To start the server, run `npm i` (first time only) and then `node index.js`
 
 ## Writing a custom client or a Bot
-Writing a custom client or bot is quite simple (slightly different for [secure servers](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)).<br>
+Writing a custom client or bot is quite simple (**completely different** for [secure servers](https://github.com/sudocode1/clichat/blob/master/secure-server/README.md)).<br>
 There is an official API wrapper made for Node.js: [clichat.js](https://github.com/sudocode1/clichat.js).<br>
 You can also make your own API wrapper by utilising this list. 
 - Everything uses pure WebSockets & JSON.
-- Connect to the server using `['auth', {username}]`
+- Connect to the server using `['auth', {ip, username}]` (IP is not currently used at all)
 - Messages should be sent as `['msg', {idOfUser, messageContent}]`
 - Messages are recieved as `['message', {username, messageContent}]`
 - A user disconnect is recieved as `['disconnect', username]`

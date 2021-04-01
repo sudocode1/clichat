@@ -1,8 +1,31 @@
 # CLIChat Secure Server (secure-server)
 CLIChat Secure Server has more authorization features and other configurable security features.
 
+## SAUTH2 / Secure Auth (v)2
+SAUTH2 introduces new user and bot authentication. 
+### User Authentication
+Users are now authenticated with generic tokens and temporary tokens. Here's how it works:
+- User will log in with `[ 'auth', { username, token } ]` (token is generic token)
+- A web page will be created and sent to the client as `[ 'authmsg', 'SERVERIP/id' ]`
+- The user then goes to that link and are given an 100 character long token with lowercase characters, uppercase characters, numbers and a period/full stop (.)
+- The user then sends `[ 'tokenauth', tok ]` (tok is temporary token)
+- The web page text is then changed, so the token can no longer be retrieved
+
+This entire process is built to prevent unauthorized bots from connecting. <Br>
+Obviously, it's still possible to crack a bot through, but its painfully difficult. <br>
+TLDR: Login -> Web page created with token -> User sends token -> Web page removed
+
+### Bot Authentication
+Bots are now authenticated with server-set bot tokens and usernames. Here's how it works:
+- Server owner will set the bot username and token server side
+- Bot will login with `[ 'botauth', { botusername, bottoken } ]`
+- Bot recieves id and join messages
+- Bot is authorized
+
+The API is currently the same as the main servers (only sending messages) however, I'm going to start working on APIv2 soon to add banning, a permissions system etc.
+
 ## Significant Differences
-- Authorization requires a token.
+- Authorization requires a generic token and a temporary token.
 - 1 User Per Token (1UPT) added.
 - **Secure Server only supports 1 port per file, while "Server" supports multiple ports.** (this is because of token adding)
 - Secure Server default port is port 70.

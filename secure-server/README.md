@@ -22,7 +22,7 @@ Bots are now authenticated with server-set bot tokens and usernames. Here's how 
 - Bot recieves id and join messages
 - Bot is authorized
 
-The API is currently the same as the main servers (only sending messages) however, I'm going to start working on APIv2 soon to add banning, a permissions system etc.
+The API is currently the same as the main servers (only sending messages) ~~however, I'm going to start working on APIv2 soon to add banning, a permissions system etc.~~.
 
 ## Significant Differences
 - Authorization requires a generic token and a temporary token.
